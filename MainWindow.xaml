@@ -5,8 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:takojsnje_sporocanje"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="TS"
+        Height="512" Width="960"
+        MinHeight="108" MinWidth="192">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Datoteka">
+                <MenuItem Header="Izhod" Click="ExitApp" />
+            </MenuItem>
+            <MenuItem Header="Stiki">
+                <MenuItem Header="Nastavitve" />
+            </MenuItem>
+            <MenuItem Header="Orodja">
+                <MenuItem Header="Dodaj" />
+                <MenuItem Header="Odstrani" />
+                <MenuItem Header="Uredi" />
+            </MenuItem>
+        </Menu>
 
-    </Grid>
+        <ListView Name="stiki" DockPanel.Dock="Left">
+            <ListViewItem Content="Coffie"></ListViewItem>
+            <ListViewItem Content="Tea"></ListViewItem>
+            <ListViewItem Content="Orange Juice"></ListViewItem>
+        </ListView>
+        <Label Content="This is a Label control." DockPanel.Dock="Right" />
+    </DockPanel>
 </Window>
