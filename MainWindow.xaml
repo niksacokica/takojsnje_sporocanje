@@ -8,8 +8,16 @@
         Title="TS"
         Height="512" Width="960"
         MinHeight="108" MinWidth="192">
-    <DockPanel>
-        <Menu DockPanel.Dock="Top">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Menu Grid.ColumnSpan="2">
             <MenuItem Header="Datoteka">
                 <MenuItem Header="Izhod" Click="ExitApp" />
             </MenuItem>
@@ -23,11 +31,16 @@
             </MenuItem>
         </Menu>
 
-        <ListView Name="stiki" DockPanel.Dock="Left">
-            <ListViewItem Content="Coffie"></ListViewItem>
-            <ListViewItem Content="Tea"></ListViewItem>
-            <ListViewItem Content="Orange Juice"></ListViewItem>
-        </ListView>
-        <Label Content="This is a Label control." DockPanel.Dock="Right" />
-    </DockPanel>
+        <DockPanel Grid.Row="1" >
+            <ListView Name="stiki" DockPanel.Dock="Top">
+                <ListViewItem Content="Coffie"></ListViewItem>
+                <ListViewItem Content="Tea"></ListViewItem>
+                <ListViewItem Content="Orange Juice"></ListViewItem>
+            </ListView>
+            
+            <Image Grid.Column="0" DockPanel.Dock="Left" />
+            <Label Grid.Column="1" Content="My Username" DockPanel.Dock="Right" />
+        </DockPanel>
+        <Label Content="This is a Label control." Grid.Row="1" Grid.Column="2" />
+    </Grid>
 </Window>
