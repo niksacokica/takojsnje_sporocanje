@@ -7,4 +7,16 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="images\emoji_icon.png" />
+    <None Remove="images\send_icon.png" />
+    <None Remove="images\user_avatar.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="images\emoji_icon.png" />
+    <Resource Include="images\send_icon.png" />
+    <Resource Include="images\user_avatar.png" />
+  </ItemGroup>
+
 </Project>

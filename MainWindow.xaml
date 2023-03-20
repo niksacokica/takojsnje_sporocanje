@@ -7,11 +7,11 @@
         mc:Ignorable="d"
         Title="TS"
         Height="512" Width="960"
-        MinHeight="108" MinWidth="192">
+        MinHeight="200" MinWidth="200">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -31,16 +31,36 @@
             </MenuItem>
         </Menu>
 
-        <DockPanel Grid.Row="1" >
+        <DockPanel Grid.Row="1">
+            <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Margin="5">
+                <Image Source="/images/user_avatar.png" Width="25" />
+                <Label Content="My Username" VerticalContentAlignment="Center" />
+            </StackPanel>
+
             <ListView Name="stiki" DockPanel.Dock="Top">
                 <ListViewItem Content="Coffie"></ListViewItem>
                 <ListViewItem Content="Tea"></ListViewItem>
                 <ListViewItem Content="Orange Juice"></ListViewItem>
             </ListView>
-            
-            <Image Grid.Column="0" DockPanel.Dock="Left" />
-            <Label Grid.Column="1" Content="My Username" DockPanel.Dock="Right" />
         </DockPanel>
-        <Label Content="This is a Label control." Grid.Row="1" Grid.Column="2" />
+
+        <DockPanel Grid.Row="1" Grid.Column="2">
+            <DockPanel  DockPanel.Dock="Bottom" Margin="5">
+                <Button DockPanel.Dock="Right">
+                    <Image Source="/images/send_icon.png" Width="25" />
+                </Button>
+                <Button Margin="5 0 5 0" DockPanel.Dock="Right">
+                    <Image Source="/images/emoji_icon.png" Width="25" />
+                </Button>
+                <TextBox DockPanel.Dock="Left" />
+            </DockPanel>
+
+            <Border BorderThickness="0 0 0 1" Padding="10 0 0 0" BorderBrush="Black" DockPanel.Dock="Top">
+                <TextBlock DockPanel.Dock="Top">
+			        We are speaking to this user
+                </TextBlock>
+            </Border>
+            <Label Content="This is a chat" HorizontalContentAlignment="Center" />
+        </DockPanel>
     </Grid>
 </Window>
