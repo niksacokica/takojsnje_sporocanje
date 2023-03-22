@@ -37,11 +37,7 @@
                 <Label Content="My Username" VerticalContentAlignment="Center" />
             </StackPanel>
 
-            <ListView Name="stiki" DockPanel.Dock="Top">
-                <ListViewItem Content="Coffie"></ListViewItem>
-                <ListViewItem Content="Tea"></ListViewItem>
-                <ListViewItem Content="Orange Juice"></ListViewItem>
-            </ListView>
+            <ListView Name="stiki" DockPanel.Dock="Top" MouseDoubleClick="stiki_MouseDoubleClick" ItemsSource="{Binding contacts}" />
         </DockPanel>
 
         <DockPanel Grid.Row="1" Grid.Column="2">
@@ -55,8 +51,8 @@
                 <TextBox DockPanel.Dock="Left" />
             </DockPanel>
 
-            <Border BorderThickness="0 0 0 1" Padding="10 0 0 0" BorderBrush="Black" DockPanel.Dock="Top">
-                <TextBlock DockPanel.Dock="Top">
+            <Border BorderThickness="0 0 0 1" Padding="10 0 0 0" BorderBrush="Black" DockPanel.Dock="Top" Height="18">
+                <TextBlock>
 			        We are speaking to this user
                 </TextBlock>
             </Border>
