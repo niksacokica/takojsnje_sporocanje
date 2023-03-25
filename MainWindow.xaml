@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="TS"
         Height="512" Width="960"
-        MinHeight="200" MinWidth="200">
+        MinHeight="200" MinWidth="200" Name="WND">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -19,15 +19,16 @@
         </Grid.RowDefinitions>
         <Menu Grid.ColumnSpan="2">
             <MenuItem Header="Datoteka">
-                <MenuItem Header="Izhod" Click="ExitApp" />
+                <!-- Click="ExitApp" -->
+                <MenuItem Header="Izhod" Command="{Binding ExitApp}" />
             </MenuItem>
             <MenuItem Header="Stiki">
                 <MenuItem Header="Nastavitve" />
             </MenuItem>
             <MenuItem Header="Orodja">
-                <MenuItem Header="Dodaj" />
-                <MenuItem Header="Odstrani" />
-                <MenuItem Header="Uredi" />
+                <MenuItem Header="Dodaj" Command="{Binding AddContact}"/>
+                <MenuItem Header="Odstrani" Command="{Binding RemoveContact}" />
+                <MenuItem Header="Uredi" Command="{Binding EditContact, UpdateSourceTrigger=PropertyChanged}" />
             </MenuItem>
         </Menu>
 
@@ -37,10 +38,10 @@
                 <Label Content="My Username" VerticalContentAlignment="Center" />
             </StackPanel>
 
-            <ListView Name="stiki" DockPanel.Dock="Top" MouseDoubleClick="stiki_MouseDoubleClick" ItemsSource="{Binding contacts}" />
+            <ListView Name="stiki" DockPanel.Dock="Top" MouseDoubleClick="stiki_MouseDoubleClick" ItemsSource="{Binding Contacts}" SelectedItem="{Binding CurrentContact}" />
         </DockPanel>
 
-        <DockPanel Grid.Row="1" Grid.Column="2">
+        <DockPanel Grid.Row="1" Grid.Column="2" DataContext="{Binding CurrentContact}" >
             <DockPanel  DockPanel.Dock="Bottom" Margin="5">
                 <Button DockPanel.Dock="Right">
                     <Image Source="/images/send_icon.png" Width="25" />
@@ -48,13 +49,11 @@
                 <Button Margin="5 0 5 0" DockPanel.Dock="Right">
                     <Image Source="/images/emoji_icon.png" Width="25" />
                 </Button>
-                <TextBox DockPanel.Dock="Left" />
+                <TextBox DockPanel.Dock="Left" VerticalContentAlignment="Center" />
             </DockPanel>
 
             <Border BorderThickness="0 0 0 1" Padding="10 0 0 0" BorderBrush="Black" DockPanel.Dock="Top" Height="18">
-                <TextBlock>
-			        We are speaking to this user
-                </TextBlock>
+                <TextBlock Text="{Binding Name}" />
             </Border>
             <Label Content="This is a chat" HorizontalContentAlignment="Center" />
         </DockPanel>
