@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
@@ -15,23 +16,32 @@ namespace takojsnje_sporocanje{
         public ICommand RemoveContact { get; private set; }
         public ICommand EditContact { get; private set; }
         public ICommand ExitApp { get; private set; }
+        public ICommand OpenSettings { get; private set; }
+        public ICommand LoadContacts { get; private set; }
+        public ICommand ExportContacts { get; private set; }
 
         public ViewModel(){
             AddContact = new Command(obj => { Contacts.Add(new("Stik" + Contacts.Count, "stik" + Contacts.Count + "@email.com", rnd.Next().ToString(), "../../../images/user_avatar.png", new(), DateTime.Now)); });
             RemoveContact = new Command(obj => { if (CurrentContact != null) Contacts.Remove(CurrentContact); else MessageBox.Show("Stik ni izbran!", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error); });
             EditContact = new Command(obj => {
-                if (CurrentContact != null){
-                    int ind = Contacts.IndexOf(CurrentContact);
-                    //Contacts[ind].Name = "Stik" + rnd.Next();
-                    Contacts[ind] = new Contact("Stik" + rnd.Next(), CurrentContact.Email, CurrentContact.PhoneNumber, CurrentContact.Avatar, CurrentContact.Conversation, CurrentContact.LastMessage);
-                    CurrentContact = Contacts[ind];
-
-                    //CurrentContact.Name = "Stik" + rnd.Next();
-                }else
+                if (CurrentContact != null)
+                    CurrentContact.Name = "Stik" + rnd.Next();
+                else
                     MessageBox.Show("Stik ni izbran!", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
             });
             ExitApp = new Command(obj => { Application.Current.Shutdown(); });
-            
+            OpenSettings = new Command(obj => { var settings = new SettingsWindow(); settings.ShowDialog(); });
+            LoadContacts = new Command(obj => {
+                OpenFileDialog openFile = new OpenFileDialog();
+                openFile.Filter = "Json files (*.json)|*.json";
+                openFile.ShowDialog();
+            });
+            ExportContacts = new Command(obj => {
+                SaveFileDialog saveFile = new SaveFileDialog();
+                saveFile.Filter = "Json files (*.json)|*.json";
+                saveFile.ShowDialog();
+            });
+
             for ( int i=0; i<3; i++ )
                 Contacts.Add(new("Stik" + Contacts.Count, "stik" + Contacts.Count + "@email.com",  rnd.Next().ToString(), "../../../images/user_avatar.png", new(), DateTime.Now));
         }

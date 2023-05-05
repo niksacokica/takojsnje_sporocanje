@@ -19,16 +19,17 @@
         </Grid.RowDefinitions>
         <Menu Grid.ColumnSpan="2">
             <MenuItem Header="Datoteka">
-                <!-- Click="ExitApp" -->
                 <MenuItem Header="Izhod" Command="{Binding ExitApp}" />
+                <MenuItem Header="Uvozi" Command="{Binding LoadContacts}" />
+                <MenuItem Header="Izvozi" Command="{Binding ExportContacts}" />
             </MenuItem>
             <MenuItem Header="Stiki">
-                <MenuItem Header="Nastavitve" />
+                <MenuItem Header="Nastavitve" Command="{Binding OpenSettings}" />
             </MenuItem>
             <MenuItem Header="Orodja">
                 <MenuItem Header="Dodaj" Command="{Binding AddContact}"/>
                 <MenuItem Header="Odstrani" Command="{Binding RemoveContact}" />
-                <MenuItem Header="Uredi" Command="{Binding EditContact, UpdateSourceTrigger=PropertyChanged}" />
+                <MenuItem Header="Uredi" Command="{Binding EditContact}" />
             </MenuItem>
         </Menu>
 
@@ -38,7 +39,16 @@
                 <Label Content="My Username" VerticalContentAlignment="Center" />
             </StackPanel>
 
-            <ListView Name="stiki" DockPanel.Dock="Top" MouseDoubleClick="stiki_MouseDoubleClick" ItemsSource="{Binding Contacts}" SelectedItem="{Binding CurrentContact}" />
+            <ListView Name="stiki" DockPanel.Dock="Top" MouseDoubleClick="stiki_MouseDoubleClick" ItemsSource="{Binding Contacts}" SelectedItem="{Binding CurrentContact}" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <DockPanel>
+                            <Image Source="{Binding Avatar}" Width="25" DockPanel.Dock="Left" />
+                            <Label Content="{Binding Name}" VerticalContentAlignment="Center" />
+                        </DockPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </DockPanel>
 
         <DockPanel Grid.Row="1" Grid.Column="2" DataContext="{Binding CurrentContact}" >
