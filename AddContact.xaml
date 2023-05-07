@@ -1,0 +1,34 @@
+﻿<Window x:Class="takojsnje_sporocanje.AddContact"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:takojsnje_sporocanje"
+        mc:Ignorable="d"
+        Title="AC" Height="450" Width="800" SizeToContent="WidthAndHeight" ResizeMode="NoResize" >
+    <StackPanel Orientation="Vertical">
+        <StackPanel Orientation="Horizontal" Margin="5">
+            <Label Content="Vzdevek*" Width="200"/>
+            <TextBox Name="name" Width="200" Text="{Binding Name}" VerticalContentAlignment="Center"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="5">
+            <Label Content="Elektronski naslov*" Width="200"/>
+            <TextBox Name="email" Width="200" Text="{Binding Email}" VerticalContentAlignment="Center"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="5">
+            <Label Content="Telefonska številka" Width="200"/>
+            <TextBox Width="200" Text="{Binding PhoneNumber}" VerticalContentAlignment="Center"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="5">
+            <Label Content="Prikazna slika" Width="200" VerticalAlignment="Center"/>
+            <Button Width="55" Click="OpenAvatar">
+                <Image Name="Avatar" Source="{Binding Avatar}" Width="50" />
+            </Button>
+            <Label Name="FileName" Margin="10 0 0 0" Width="135" VerticalAlignment="Center"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="5 50 5 5" HorizontalAlignment="Center">
+            <Button Width="100" Margin="0 0 20 0" Click="OkClick" IsDefault="true">V redu</Button>
+            <Button Width="100" IsCancel="True">Prekliči</Button>
+        </StackPanel>
+    </StackPanel>
+</Window>

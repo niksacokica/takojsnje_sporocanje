@@ -25,7 +25,7 @@ namespace takojsnje_sporocanje.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("user")]
         public string Name {
             get {
                 return ((string)(this["Name"]));
@@ -37,7 +37,7 @@ namespace takojsnje_sporocanje.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("user@email.com")]
         public string Email {
             get {
                 return ((string)(this["Email"]));
@@ -49,6 +49,7 @@ namespace takojsnje_sporocanje.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2000-01-01")]
         public global::System.DateTime DOB {
             get {
                 return ((global::System.DateTime)(this["DOB"]));
@@ -60,7 +61,7 @@ namespace takojsnje_sporocanje.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("../../../images/user_avatar.png")]
         public string Avatar {
             get {
                 return ((string)(this["Avatar"]));
@@ -84,6 +85,7 @@ namespace takojsnje_sporocanje.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("M")]
         public char Sex {
             get {
                 return ((char)(this["Sex"]));

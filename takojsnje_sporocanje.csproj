@@ -14,6 +14,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Emoji.Wpf" Version="0.3.4" />
+    <PackageReference Include="Uno.UI" Version="4.8.33" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="images\emoji_icon.png" />
     <Resource Include="images\send_icon.png" />
     <Resource Include="images\user_avatar.png" />

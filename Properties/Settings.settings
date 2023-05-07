@@ -3,22 +3,22 @@
   <Profiles />
   <Settings>
     <Setting Name="Name" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">user</Value>
     </Setting>
     <Setting Name="Email" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">user@email.com</Value>
     </Setting>
     <Setting Name="DOB" Type="System.DateTime" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">2000-01-01</Value>
     </Setting>
     <Setting Name="Avatar" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">../../../images/user_avatar.png</Value>
     </Setting>
     <Setting Name="Phone" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="Sex" Type="System.Char" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">M</Value>
     </Setting>
   </Settings>
 </SettingsFile>

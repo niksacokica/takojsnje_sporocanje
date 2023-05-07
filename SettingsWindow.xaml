@@ -9,7 +9,40 @@
     <DockPanel>
         <TabControl>
             <TabItem Header="Osebni Podatki">
-                <Label Content="Content goes here..." />
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="Vzdevek*" Width="200"/>
+                        <TextBox Name="name" Width="200" VerticalContentAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="Elektronski naslov*" Width="200"/>
+                        <TextBox Name="email" Width="200" VerticalContentAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="Telefonska številka" Width="200"/>
+                        <TextBox Name="phone" Width="200" VerticalContentAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="Spol" Width="200"/>
+                        <ComboBox Name="sex" Width="200" VerticalContentAlignment="Center">
+                            <ComboBoxItem>Moški</ComboBoxItem>
+                            <ComboBoxItem>Ženski</ComboBoxItem>
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="Datum rojstva" Width="200"/>
+                        <DatePicker Name="dob" SelectedDateFormat="Long" Width="200" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="Prikazna slika*" Width="200"/>
+                        <Button Width="75" Click="OpenAvatar">Izberi sliko</Button>
+                        <Label Name="FileName" Margin="10 0 0 0" Width="115"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5 50 5 5" HorizontalAlignment="Center">
+                        <Button Content="V redu" Width="100" Margin="0 0 20 0" Click="OkClick" IsDefault="true"></Button>
+                        <Button Content="Prekliči" Width="100" IsCancel="True"></Button>
+                    </StackPanel>
+                </StackPanel>
             </TabItem>
             <TabItem Header="Nastavitve" />
         </TabControl>

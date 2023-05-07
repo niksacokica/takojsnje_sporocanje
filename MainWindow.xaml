@@ -29,14 +29,14 @@
             <MenuItem Header="Orodja">
                 <MenuItem Header="Dodaj" Command="{Binding AddContact}"/>
                 <MenuItem Header="Odstrani" Command="{Binding RemoveContact}" />
-                <MenuItem Header="Uredi" Command="{Binding EditContact}" />
+                <MenuItem Header="Uredi" Command="{Binding EditContact}" IsEnabled="{Binding CurrentContact, TargetNullValue=false}" />
             </MenuItem>
         </Menu>
 
         <DockPanel Grid.Row="1">
             <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Margin="5">
-                <Image Source="/images/user_avatar.png" Width="25" />
-                <Label Content="My Username" VerticalContentAlignment="Center" />
+                <Image Name="useravatar" Width="25" />
+                <Label Name="username" VerticalContentAlignment="Center" />
             </StackPanel>
 
             <ListView Name="stiki" DockPanel.Dock="Top" MouseDoubleClick="stiki_MouseDoubleClick" ItemsSource="{Binding Contacts}" SelectedItem="{Binding CurrentContact}" >
@@ -44,28 +44,26 @@
                     <DataTemplate>
                         <DockPanel>
                             <Image Source="{Binding Avatar}" Width="25" DockPanel.Dock="Left" />
+                            <Ellipse Name="UserStatus" Width="10" Height="10" Margin="5" Fill="Black" />
                             <Label Content="{Binding Name}" VerticalContentAlignment="Center" />
                         </DockPanel>
+
+                        <DataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding Status}" Value="Online">
+                                <Setter TargetName="UserStatus" Property="Fill" Value="Green" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Status}" Value="Away">
+                                <Setter TargetName="UserStatus" Property="Fill" Value="Yellow" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Status}" Value="Busy">
+                                <Setter TargetName="UserStatus" Property="Fill" Value="Red" />
+                            </DataTrigger>
+                        </DataTemplate.Triggers>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
         </DockPanel>
 
-        <DockPanel Grid.Row="1" Grid.Column="2" DataContext="{Binding CurrentContact}" >
-            <DockPanel  DockPanel.Dock="Bottom" Margin="5">
-                <Button DockPanel.Dock="Right">
-                    <Image Source="/images/send_icon.png" Width="25" />
-                </Button>
-                <Button Margin="5 0 5 0" DockPanel.Dock="Right">
-                    <Image Source="/images/emoji_icon.png" Width="25" />
-                </Button>
-                <TextBox DockPanel.Dock="Left" VerticalContentAlignment="Center" />
-            </DockPanel>
-
-            <Border BorderThickness="0 0 0 1" Padding="10 0 0 0" BorderBrush="Black" DockPanel.Dock="Top" Height="18">
-                <TextBlock Text="{Binding Name}" />
-            </Border>
-            <Label Content="This is a chat" HorizontalContentAlignment="Center" />
-        </DockPanel>
+        <local:ChatBox Grid.Row="1" Grid.Column="2" OnNewMessage="ChatBox_OnNewMessage" DataContext="{Binding CurrentContact}" />
     </Grid>
 </Window>
