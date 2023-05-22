@@ -17,7 +17,7 @@ namespace takojsnje_sporocanje{
 
             if(openFile.ShowDialog() == true){
                 FileName.Content = openFile.SafeFileName;
-                Avatar.Source = (ImageSource)new ImageSourceConverter().ConvertFromString(openFile.FileName);
+                ((Contact)DataContext).Avatar = openFile.FileName;
             }
         }
 

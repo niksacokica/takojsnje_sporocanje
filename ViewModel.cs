@@ -43,7 +43,6 @@ namespace takojsnje_sporocanje{
                 editContact.Closed += (sender, EventArgs) => {
                     if(!editContact.cancel){
                         Contact cont = (Contact)editContact.DataContext;
-                        MessageBox.Show(cont.Name, cont.Email, MessageBoxButton.OK, MessageBoxImage.Error);
 
                         int ind = Contacts.IndexOf(CurrentContact);
                         Contacts[ind] = new Contact(cont.Name, cont.Email, cont.PhoneNumber, cont.Avatar, cont.Conversation, cont.LastMessage, cont.Status);
@@ -86,6 +85,9 @@ namespace takojsnje_sporocanje{
         public Contact? CurrentContact{
             get { return currentContact; }
             set{
+                if(value == null)
+                    return;
+
                 currentContact = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CurrentContact"));
 
