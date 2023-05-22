@@ -20,5 +20,11 @@
     <Setting Name="Sex" Type="System.Char" Scope="User">
       <Value Profile="(Default)">M</Value>
     </Setting>
+    <Setting Name="PeriodicalSave" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="PeriodicalSaveTimeSpan" Type="System.TimeSpan" Scope="User">
+      <Value Profile="(Default)">00:00:01</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

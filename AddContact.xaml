@@ -6,6 +6,10 @@
         xmlns:local="clr-namespace:takojsnje_sporocanje"
         mc:Ignorable="d"
         Title="AC" Height="450" Width="800" SizeToContent="WidthAndHeight" ResizeMode="NoResize" >
+    <Window.Resources>
+        <ResourceDictionary Source="Resources.xaml" />
+    </Window.Resources>
+    
     <StackPanel Orientation="Vertical">
         <StackPanel Orientation="Horizontal" Margin="5">
             <Label Content="Vzdevek*" Width="200"/>
@@ -27,8 +31,8 @@
             <Label Name="FileName" Margin="10 0 0 0" Width="135" VerticalAlignment="Center"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="5 50 5 5" HorizontalAlignment="Center">
-            <Button Width="100" Margin="0 0 20 0" Click="OkClick" IsDefault="true">V redu</Button>
-            <Button Width="100" IsCancel="True">Prekliči</Button>
+            <Button Style="{StaticResource ConfirmButton}" Click="OkClick"/>
+            <Button Style="{StaticResource CancelButton}"/>
         </StackPanel>
     </StackPanel>
 </Window>

@@ -6,13 +6,17 @@ using System.IO;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Threading;
+using Windows.UI.Xaml.Controls;
 
 namespace takojsnje_sporocanje{
     public class ViewModel : INotifyPropertyChanged{
         private Random rnd = new();
+        private DispatcherTimer dt = new DispatcherTimer();
 
         public ObservableCollection<Contact> Contacts { get; private set; } = new ObservableCollection<Contact>();
         private Contact? currentContact = null;
+        private FrameworkElement uc = null;
 
         public ICommand AddContact { get; private set; }
         public ICommand RemoveContact { get; private set; }
@@ -21,6 +25,8 @@ namespace takojsnje_sporocanje{
         public ICommand OpenSettings { get; private set; }
         public ICommand LoadContacts { get; private set; }
         public ICommand ExportContacts { get; private set; }
+        public ICommand AltView { get; private set; }
+        public ICommand OgView { get; private set; }
 
         private EditContact? editContact = null;
         public ViewModel(){
@@ -43,7 +49,6 @@ namespace takojsnje_sporocanje{
                 editContact.Closed += (sender, EventArgs) => {
                     if(!editContact.cancel){
                         Contact cont = (Contact)editContact.DataContext;
-                        MessageBox.Show(cont.Name, cont.Email, MessageBoxButton.OK, MessageBoxImage.Error);
 
                         int ind = Contacts.IndexOf(CurrentContact);
                         Contacts[ind] = new Contact(cont.Name, cont.Email, cont.PhoneNumber, cont.Avatar, cont.Conversation, cont.LastMessage, cont.Status);
@@ -54,13 +59,13 @@ namespace takojsnje_sporocanje{
 
             });
             ExitApp = new Command(obj => { Application.Current.Shutdown(); });
-            OpenSettings = new Command(obj => { var settings = new SettingsWindow(); settings.ShowDialog(); });
+            OpenSettings = new Command(obj => { var settings = new SettingsWindow(); settings.ShowDialog(); dt.Interval = Properties.Settings.Default.PeriodicalSaveTimeSpan; });
             LoadContacts = new Command(obj => {
                 OpenFileDialog openFile = new OpenFileDialog();
                 openFile.Filter = "Json files (*.json)|*.json";
                 openFile.ShowDialog();
 
-                string jsonString = File.ReadAllText(openFile.FileName);
+                string jsonString = loadCurrentState(openFile.FileName);
                 ObservableCollection<Contact> contacts = JsonSerializer.Deserialize<ObservableCollection<Contact>>(jsonString);
                 if(contacts != null)
                     Contacts = contacts;
@@ -72,13 +77,36 @@ namespace takojsnje_sporocanje{
                 saveFile.Filter = "Json files (*.json)|*.json";
                 saveFile.ShowDialog();
 
-                string jsonString = JsonSerializer.Serialize(Contacts, new JsonSerializerOptions { WriteIndented = true });
-                File.WriteAllText(saveFile.FileName, jsonString);
+                saveCurrentState(saveFile.FileName);
+            });
+
+            AltView = new Command(obj => {
+                UC = new NewView();
+            });
+
+            OgView = new Command(obj => {
+                UC = new OgView();
             });
 
             string[] status = new string[] { "online", "Away", "Busy", "Unknown", "Offline" };
-            for ( int i=0; i<3; i++ )
+            for (int i=0; i<3; i++)
                 Contacts.Add(new("Stik" + Contacts.Count, "stik" + Contacts.Count + "@email.com",  rnd.Next().ToString(), "../../../images/user_avatar.png", new(), DateTime.Now, status[rnd.Next(0, status.Length)]));
+
+            string jsonString = loadCurrentState("./temp.json");
+            ObservableCollection<Contact> contacts = JsonSerializer.Deserialize<ObservableCollection<Contact>>(jsonString);
+            if (contacts != null)
+                Contacts = contacts;
+
+            dt.Interval = Properties.Settings.Default.PeriodicalSaveTimeSpan;
+            dt.Tick += (object? sender, EventArgs e) => {
+                if (!Properties.Settings.Default.PeriodicalSave)
+                    return;
+
+                saveCurrentState("./temp.json");
+            };
+            dt.Start();
+
+            UC = new OgView();
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -86,6 +114,9 @@ namespace takojsnje_sporocanje{
         public Contact? CurrentContact{
             get { return currentContact; }
             set{
+                if(value == null)
+                    return;
+
                 currentContact = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CurrentContact"));
 
@@ -93,6 +124,11 @@ namespace takojsnje_sporocanje{
                 if(editContact != null)
                     editContact.DataContext = curContact;
             }
+        }
+
+        public FrameworkElement? UC{
+            get { return uc; }
+            set { uc = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("UC")); }
         }
 
         private string[] messages = new string[] { "Zdravo!", "Kako si?", "Kako ti lahko pomagam?", "Pozdravljen.", "Dober dan." };
@@ -107,5 +143,11 @@ namespace takojsnje_sporocanje{
 
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CurrentContact"));
         }
+
+        public void saveCurrentState(string fileName) =>
+            File.WriteAllText(fileName, JsonSerializer.Serialize(Contacts, new JsonSerializerOptions { WriteIndented = true }));
+
+        public string loadCurrentState(string fileName) =>
+            File.ReadAllText(fileName);
     }
 }

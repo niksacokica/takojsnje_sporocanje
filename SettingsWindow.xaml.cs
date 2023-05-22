@@ -20,6 +20,9 @@ namespace takojsnje_sporocanje{
             dob.SelectedDate = Properties.Settings.Default.DOB;
             FileName.Content = Path.GetFileName(Properties.Settings.Default.Avatar);
 
+            save.IsChecked = Properties.Settings.Default.PeriodicalSave;
+            time.Text = Properties.Settings.Default.PeriodicalSaveTimeSpan.Seconds.ToString();
+
             lastFile = Properties.Settings.Default.Avatar;
         }
 
@@ -33,7 +36,7 @@ namespace takojsnje_sporocanje{
             }
         }
 
-        private void OkClick(object sender, RoutedEventArgs e){
+        private void OkClickData(object sender, RoutedEventArgs e){
             bool ok = true;
 
             if(name.Text.Length < 3){
@@ -61,6 +64,34 @@ namespace takojsnje_sporocanje{
                 Properties.Settings.Default.Sex = sex.SelectedIndex == 0 ? 'M' : 'F';
                 Properties.Settings.Default.DOB = (DateTime)dob.SelectedDate;
                 Properties.Settings.Default.Avatar = lastFile;
+
+                Properties.Settings.Default.Save();
+                DialogResult = true;
+            }
+        }
+
+        private void OkClickSettings(object sender, RoutedEventArgs e){
+            bool ok = true;
+
+            if(string.IsNullOrEmpty(time.Text)){
+                time.Background = Brushes.Red;
+
+                ok = false;
+            }else{
+                int potentialValue = 0;
+
+                Int32.TryParse(time.Text, out potentialValue);
+                if(potentialValue < 1){
+                    time.Background = Brushes.Red;
+
+                    ok = false;
+                }else
+                    time.Background = Brushes.White;
+            }
+
+            if(ok){
+                Properties.Settings.Default.PeriodicalSave = (bool)save.IsChecked;
+                Properties.Settings.Default.PeriodicalSaveTimeSpan = TimeSpan.FromSeconds(Int32.Parse(time.Text));
 
                 Properties.Settings.Default.Save();
                 DialogResult = true;

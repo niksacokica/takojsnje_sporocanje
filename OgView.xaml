@@ -1,0 +1,68 @@
+﻿<UserControl x:Class="takojsnje_sporocanje.OgView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:takojsnje_sporocanje"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Menu Grid.ColumnSpan="2">
+            <MenuItem Header="Datoteka">
+                <MenuItem Header="Izhod" Command="{Binding ExitApp}" />
+                <MenuItem Header="Uvozi" Command="{Binding LoadContacts}" />
+                <MenuItem Header="Izvozi" Command="{Binding ExportContacts}" />
+                <MenuItem Header="Alternativna postavitev" Command="{Binding AltView}" />
+            </MenuItem>
+            <MenuItem Header="Stiki">
+                <MenuItem Header="Nastavitve" Command="{Binding OpenSettings}" />
+            </MenuItem>
+            <MenuItem Header="Orodja">
+                <MenuItem Header="Dodaj" Command="{Binding AddContact}"/>
+                <MenuItem Header="Odstrani" Command="{Binding RemoveContact}" />
+                <MenuItem Header="Uredi" Command="{Binding EditContact}" IsEnabled="{Binding CurrentContact, TargetNullValue=false}" />
+            </MenuItem>
+        </Menu>
+
+        <DockPanel Grid.Row="1">
+            <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Margin="5">
+                <Image Name="useravatar" Width="25" />
+                <Label Name="username" VerticalContentAlignment="Center" />
+            </StackPanel>
+
+            <ListView Name="stiki" DockPanel.Dock="Top" MouseDoubleClick="stiki_MouseDoubleClick" ItemsSource="{Binding Contacts}" SelectedItem="{Binding CurrentContact}" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <DockPanel>
+                            <Image Source="{Binding Avatar}" Width="25" DockPanel.Dock="Left" />
+                            <Ellipse Name="UserStatus" Width="10" Height="10" Margin="5" Fill="Black" />
+                            <Label Content="{Binding Name}" VerticalContentAlignment="Center" />
+                        </DockPanel>
+
+                        <DataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding Status}" Value="Online">
+                                <Setter TargetName="UserStatus" Property="Fill" Value="Green" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Status}" Value="Away">
+                                <Setter TargetName="UserStatus" Property="Fill" Value="Yellow" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Status}" Value="Busy">
+                                <Setter TargetName="UserStatus" Property="Fill" Value="Red" />
+                            </DataTrigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </DockPanel>
+
+        <local:ChatBox Grid.Row="1" Grid.Column="2" OnNewMessage="ChatBox_OnNewMessage" DataContext="{Binding CurrentContact}" />
+    </Grid>
+</UserControl>

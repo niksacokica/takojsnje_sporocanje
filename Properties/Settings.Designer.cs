@@ -94,5 +94,29 @@ namespace takojsnje_sporocanje.Properties {
                 this["Sex"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool PeriodicalSave {
+            get {
+                return ((bool)(this["PeriodicalSave"]));
+            }
+            set {
+                this["PeriodicalSave"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("00:00:01")]
+        public global::System.TimeSpan PeriodicalSaveTimeSpan {
+            get {
+                return ((global::System.TimeSpan)(this["PeriodicalSaveTimeSpan"]));
+            }
+            set {
+                this["PeriodicalSaveTimeSpan"] = value;
+            }
+        }
     }
 }

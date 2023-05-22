@@ -7,19 +7,39 @@
              xmlns:local="clr-namespace:takojsnje_sporocanje"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <DockPanel>
-        <DockPanel  DockPanel.Dock="Bottom" Margin="5">
-            <Button DockPanel.Dock="Right" Click="SendMessage">
-                <Image Source="/images/send_icon.png" Width="30" />
-            </Button>
-            <emoji:Picker Name="emojiPicker" Margin="5 0 5 0" DockPanel.Dock="Right" FontSize="25" SelectionChanged="EmojiPickerSelectionChanged" />
-            <TextBox Name="chatSend" DockPanel.Dock="Left" VerticalContentAlignment="Center" KeyDown="ChatEnter" />
+    <Canvas x:Name="parent" Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl, AncestorLevel=1},
+        Path=ActualWidth}" Height="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl, AncestorLevel=1},
+        Path=ActualHeight}">
+        <DockPanel Canvas.Left="0" Canvas.Top="0" Width="{Binding ActualWidth, ElementName=parent}" Height="{Binding ActualHeight, ElementName=parent}" >
+            <DockPanel  DockPanel.Dock="Bottom" Margin="5">
+                <Button DockPanel.Dock="Right" Click="SendMessage">
+                    <Image Source="/images/send_icon.png" Width="30" />
+                </Button>
+                <emoji:Picker Name="emojiPicker" Margin="5 0 5 0" DockPanel.Dock="Right" FontSize="25" SelectionChanged="EmojiPickerSelectionChanged" />
+                <TextBox Name="chatSend" DockPanel.Dock="Left" VerticalContentAlignment="Center" KeyDown="ChatEnter" />
+            </DockPanel>
+
+            <Border BorderThickness="0 0 0 1" Padding="10 0 0 0" BorderBrush="Black" DockPanel.Dock="Top" Height="25">
+                <Label Name="userName" Content="{Binding Name}" />
+            </Border>
+
+            <Label Name="convo" Content="{Binding GetConversation}" />
         </DockPanel>
-
-        <Border BorderThickness="0 0 0 1" Padding="10 0 0 0" BorderBrush="Black" DockPanel.Dock="Top" Height="25">
-            <Label Name="userName" Content="{Binding Name}" />
-        </Border>
-
-        <Label Content="{Binding GetConversation}" />
-    </DockPanel>
+        <Canvas Canvas.Top="27" Canvas.Left="0"  Width="{Binding ActualWidth, ElementName=convo}" Height="{Binding ActualHeight, ElementName=convo}">
+            <Image Source="/images/no_chat.png" Width="30" Height="30">
+                <Image.Triggers>
+                    <EventTrigger  RoutedEvent="Image.Loaded">
+                        <BeginStoryboard>
+                            <Storyboard RepeatBehavior="Forever">
+                                <DoubleAnimationUsingPath Source="X" Storyboard.TargetProperty="(Canvas.Left)" 
+                                                                Duration="0:0:2" PathGeometry="{StaticResource Krozenje}"/>
+                                <DoubleAnimationUsingPath Source="Y" Storyboard.TargetProperty="(Canvas.Top)" 
+                                                                Duration="0:0:2" PathGeometry="{StaticResource Krozenje}"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Image.Triggers>
+            </Image> 
+        </Canvas>
+    </Canvas>
 </UserControl>

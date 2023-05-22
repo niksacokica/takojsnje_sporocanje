@@ -6,6 +6,10 @@
         xmlns:local="clr-namespace:takojsnje_sporocanje"
         mc:Ignorable="d"
         Title="SW" Height="450" Width="800" SizeToContent="WidthAndHeight" ResizeMode="NoResize" >
+    <Window.Resources>
+        <ResourceDictionary Source="Resources.xaml" />
+    </Window.Resources>
+    
     <DockPanel>
         <TabControl>
             <TabItem Header="Osebni Podatki">
@@ -39,12 +43,27 @@
                         <Label Name="FileName" Margin="10 0 0 0" Width="115"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="5 50 5 5" HorizontalAlignment="Center">
-                        <Button Content="V redu" Width="100" Margin="0 0 20 0" Click="OkClick" IsDefault="true"></Button>
-                        <Button Content="Prekliči" Width="100" IsCancel="True"></Button>
+                        <Button Style="{StaticResource ConfirmButton}" Click="OkClickData"/>
+                        <Button Style="{StaticResource CancelButton}"/>
                     </StackPanel>
                 </StackPanel>
             </TabItem>
-            <TabItem Header="Nastavitve" />
+            <TabItem Header="Nastavitve">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="Samodejno shranjevanje" Width="200"/>
+                        <CheckBox Name="save" Margin="0 7 0 0"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="Časovni razpon" Width="200"/>
+                        <TextBox Name="time" Width="100" VerticalContentAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5 50 5 5" HorizontalAlignment="Center">
+                        <Button Style="{StaticResource ConfirmButton}" Click="OkClickSettings"/>
+                        <Button Style="{StaticResource CancelButton}"/>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
         </TabControl>
     </DockPanel>
 </Window>
