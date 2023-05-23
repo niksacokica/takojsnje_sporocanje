@@ -63,7 +63,8 @@ namespace takojsnje_sporocanje{
             LoadContacts = new Command(obj => {
                 OpenFileDialog openFile = new OpenFileDialog();
                 openFile.Filter = "Json files (*.json)|*.json";
-                openFile.ShowDialog();
+                if(!(bool)openFile.ShowDialog())
+                    return;
 
                 string jsonString = loadCurrentState(openFile.FileName);
                 ObservableCollection<Contact> contacts = JsonSerializer.Deserialize<ObservableCollection<Contact>>(jsonString);
@@ -75,7 +76,8 @@ namespace takojsnje_sporocanje{
             ExportContacts = new Command(obj => {
                 SaveFileDialog saveFile = new SaveFileDialog();
                 saveFile.Filter = "Json files (*.json)|*.json";
-                saveFile.ShowDialog();
+                if(!(bool)saveFile.ShowDialog())
+                    return;
 
                 saveCurrentState(saveFile.FileName);
             });
@@ -92,10 +94,12 @@ namespace takojsnje_sporocanje{
             for (int i=0; i<3; i++)
                 Contacts.Add(new("Stik" + Contacts.Count, "stik" + Contacts.Count + "@email.com",  rnd.Next().ToString(), "../../../images/user_avatar.png", new(), DateTime.Now, status[rnd.Next(0, status.Length)]));
 
-            string jsonString = loadCurrentState("./temp.json");
-            ObservableCollection<Contact> contacts = JsonSerializer.Deserialize<ObservableCollection<Contact>>(jsonString);
-            if (contacts != null)
-                Contacts = contacts;
+            try{
+                string jsonString = loadCurrentState("./temp.json");
+                ObservableCollection<Contact> contacts = JsonSerializer.Deserialize<ObservableCollection<Contact>>(jsonString);
+                if (contacts != null)
+                    Contacts = contacts;
+            }catch{};
 
             dt.Interval = Properties.Settings.Default.PeriodicalSaveTimeSpan;
             dt.Tick += (object? sender, EventArgs e) => {
@@ -114,12 +118,14 @@ namespace takojsnje_sporocanje{
         public Contact? CurrentContact{
             get { return currentContact; }
             set{
-                if(value == null)
-                    return;
-
                 currentContact = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CurrentContact"));
 
+                if(value == null){
+                    if(editContact != null)
+                        editContact.Close();
+                    return;
+                }
                 var curContact = new Contact(value.Name, value.Email, value.PhoneNumber, value.Avatar, value.Conversation, value.LastMessage, value.Status);
                 if(editContact != null)
                     editContact.DataContext = curContact;

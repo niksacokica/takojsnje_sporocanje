@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <None Remove="images\emoji_icon.png" />
+    <None Remove="images\no_chat.png" />
     <None Remove="images\send_icon.png" />
     <None Remove="images\user_avatar.png" />
   </ItemGroup>
@@ -20,6 +21,7 @@
 
   <ItemGroup>
     <Resource Include="images\emoji_icon.png" />
+    <Resource Include="images\no_chat.png" />
     <Resource Include="images\send_icon.png" />
     <Resource Include="images\user_avatar.png" />
   </ItemGroup>

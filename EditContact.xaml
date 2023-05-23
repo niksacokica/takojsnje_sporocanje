@@ -9,28 +9,28 @@
     <Window.Resources>
         <ResourceDictionary Source="Resources.xaml" />
     </Window.Resources>
-    
-    <StackPanel Orientation="Vertical">
-        <StackPanel Orientation="Horizontal" Margin="5">
-            <Label Content="Vzdevek*" Width="200"/>
-            <TextBox Name="name" Width="200" Text="{Binding Name}" VerticalContentAlignment="Center"/>
+
+    <StackPanel Style="{StaticResource PopUpStackPanel}">
+        <StackPanel Style="{StaticResource PopUpStackPanelSmall}">
+            <Label Content="Vzdevek*" Style="{StaticResource PupUpLabel}"/>
+            <TextBox Name="name" Text="{Binding Name}" Style="{StaticResource PupUpTextBox}"/>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Margin="5">
-            <Label Content="Elektronski naslov*" Width="200"/>
-            <TextBox Name="email" Width="200" Text="{Binding Email}" VerticalContentAlignment="Center"/>
+        <StackPanel Style="{StaticResource PopUpStackPanelSmall}">
+            <Label Content="Elektronski naslov*" Style="{StaticResource PupUpLabel}"/>
+            <TextBox Name="email" Text="{Binding Email}" Style="{StaticResource PupUpTextBox}"/>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Margin="5">
-            <Label Content="Telefonska številka" Width="200"/>
-            <TextBox Width="200" Text="{Binding PhoneNumber}" VerticalContentAlignment="Center"/>
+        <StackPanel Style="{StaticResource PopUpStackPanelSmall}">
+            <Label Content="Telefonska številka" Style="{StaticResource PupUpLabel}"/>
+            <TextBox Text="{Binding PhoneNumber}" Style="{StaticResource PupUpTextBox}"/>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Margin="5">
-            <Label Content="Prikazna slika" Width="200" VerticalAlignment="Center"/>
-            <Button Width="55" Click="OpenAvatar">
-                <Image Name="Avatar" Source="{Binding Avatar}" Width="50" />
+        <StackPanel Style="{StaticResource PopUpStackPanelSmall}">
+            <Label Content="Prikazna slika" Style="{StaticResource PupUpLabel}"/>
+            <Button Click="OpenAvatar" Style="{StaticResource PopUpImageButton}">
+                <Image Name="Avatar" Style="{StaticResource PopUpImage}"/>
             </Button>
-            <Label Name="FileName" Margin="10 0 0 0" Width="135" VerticalAlignment="Center"/>
+            <Label Name="FileName" Style="{StaticResource ImageDescriptor}"/>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Margin="5 50 5 5" HorizontalAlignment="Center">
+        <StackPanel Style="{StaticResource PopUpStackPanelExitButtons}">
             <Button Style="{StaticResource ConfirmButton}" Click="OkClick"/>
             <Button Style="{StaticResource CancelButton}"/>
         </StackPanel>

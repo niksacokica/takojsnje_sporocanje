@@ -7,6 +7,10 @@
         mc:Ignorable="d"
         Title="TS"
         Height="512" Width="960"
-        MinHeight="200" MinWidth="200" Name="WND">
-    <ContentControl Content="{Binding UC}"/>
+        MinHeight="400" MinWidth="400" Name="WND">
+    <Window.Resources>
+        <ResourceDictionary Source="Resources.xaml" />
+    </Window.Resources>
+
+    <ContentControl Style="{StaticResource MainView}"/>
 </Window>

@@ -13,52 +13,52 @@
     <DockPanel>
         <TabControl>
             <TabItem Header="Osebni Podatki">
-                <StackPanel Orientation="Vertical">
-                    <StackPanel Orientation="Horizontal" Margin="5">
-                        <Label Content="Vzdevek*" Width="200"/>
-                        <TextBox Name="name" Width="200" VerticalContentAlignment="Center"/>
+                <StackPanel Style="{StaticResource PopUpStackPanel}">
+                    <StackPanel Style="{StaticResource PopUpStackPanelSmall}">
+                        <Label Content="Vzdevek*" Style="{StaticResource PupUpLabel}"/>
+                        <TextBox Name="name" Style="{StaticResource PupUpTextBox}"/>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="5">
-                        <Label Content="Elektronski naslov*" Width="200"/>
-                        <TextBox Name="email" Width="200" VerticalContentAlignment="Center"/>
+                    <StackPanel Style="{StaticResource PopUpStackPanelSmall}">
+                        <Label Content="Elektronski naslov*" Style="{StaticResource PupUpLabel}"/>
+                        <TextBox Name="email" Style="{StaticResource PupUpTextBox}"/>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="5">
-                        <Label Content="Telefonska številka" Width="200"/>
-                        <TextBox Name="phone" Width="200" VerticalContentAlignment="Center"/>
+                    <StackPanel Style="{StaticResource PopUpStackPanelSmall}">
+                        <Label Content="Telefonska številka" Style="{StaticResource PupUpLabel}"/>
+                        <TextBox Name="phone" Style="{StaticResource PupUpTextBox}"/>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="5">
-                        <Label Content="Spol" Width="200"/>
-                        <ComboBox Name="sex" Width="200" VerticalContentAlignment="Center">
+                    <StackPanel Style="{StaticResource PopUpStackPanelSmall}">
+                        <Label Content="Spol" Style="{StaticResource PupUpLabel}"/>
+                        <ComboBox Name="sex" Style="{StaticResource PopUpComboBox}">
                             <ComboBoxItem>Moški</ComboBoxItem>
                             <ComboBoxItem>Ženski</ComboBoxItem>
                         </ComboBox>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="5">
-                        <Label Content="Datum rojstva" Width="200"/>
-                        <DatePicker Name="dob" SelectedDateFormat="Long" Width="200" />
+                    <StackPanel Style="{StaticResource PopUpStackPanelSmall}">
+                        <Label Content="Datum rojstva" Style="{StaticResource PupUpLabel}"/>
+                        <DatePicker Name="dob" Style="{StaticResource PopUpDatePicker}"/>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="5">
-                        <Label Content="Prikazna slika*" Width="200"/>
-                        <Button Width="75" Click="OpenAvatar">Izberi sliko</Button>
-                        <Label Name="FileName" Margin="10 0 0 0" Width="115"/>
+                    <StackPanel Style="{StaticResource PopUpStackPanelSmall}">
+                        <Label Content="Prikazna slika*" Style="{StaticResource PupUpLabel}"/>
+                        <Button Click="OpenAvatar" Style="{StaticResource PopUpImagePicker}"/>
+                        <Label Name="FileName" Style="{StaticResource ImageDescriptor}"/>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="5 50 5 5" HorizontalAlignment="Center">
+                    <StackPanel Style="{StaticResource PopUpStackPanelExitButtons}">
                         <Button Style="{StaticResource ConfirmButton}" Click="OkClickData"/>
                         <Button Style="{StaticResource CancelButton}"/>
                     </StackPanel>
                 </StackPanel>
             </TabItem>
             <TabItem Header="Nastavitve">
-                <StackPanel Orientation="Vertical">
-                    <StackPanel Orientation="Horizontal" Margin="5">
-                        <Label Content="Samodejno shranjevanje" Width="200"/>
-                        <CheckBox Name="save" Margin="0 7 0 0"/>
+                <StackPanel Style="{StaticResource PopUpStackPanel}">
+                    <StackPanel Style="{StaticResource PopUpStackPanelSmall}">
+                        <Label Content="Samodejno shranjevanje" Style="{StaticResource PupUpLabel}"/>
+                        <CheckBox Name="save" Style="{StaticResource PopUpCheckBox}"/>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="5">
-                        <Label Content="Časovni razpon" Width="200"/>
-                        <TextBox Name="time" Width="100" VerticalContentAlignment="Center"/>
+                    <StackPanel Style="{StaticResource PopUpStackPanelSmall}">
+                        <Label Content="Časovni razpon" Style="{StaticResource PupUpLabel}"/>
+                        <TextBox Name="time" Style="{StaticResource PupUpTextBox}"/>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="5 50 5 5" HorizontalAlignment="Center">
+                    <StackPanel Style="{StaticResource PopUpStackPanelExitButtons}">
                         <Button Style="{StaticResource ConfirmButton}" Click="OkClickSettings"/>
                         <Button Style="{StaticResource CancelButton}"/>
                     </StackPanel>

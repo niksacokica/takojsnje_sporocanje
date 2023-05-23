@@ -6,6 +6,10 @@
              xmlns:local="clr-namespace:takojsnje_sporocanje"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary Source="Resources.xaml" />
+    </UserControl.Resources>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -15,7 +19,8 @@
             <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Menu Grid.ColumnSpan="2">
+        
+        <Menu Style="{StaticResource ViewMenu}">
             <MenuItem Header="Datoteka">
                 <MenuItem Header="Izhod" Command="{Binding ExitApp}" />
                 <MenuItem Header="Uvozi" Command="{Binding LoadContacts}" />
@@ -32,19 +37,19 @@
             </MenuItem>
         </Menu>
 
-        <DockPanel Grid.Row="1">
-            <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Margin="5">
-                <Image Name="useravatar" Width="25" />
-                <Label Name="username" VerticalContentAlignment="Center" />
+        <DockPanel Style="{StaticResource ViewDockPanelOg}">
+            <StackPanel Style="{StaticResource ViewStackPanel}">
+                <Image Name="useravatar" Style="{StaticResource ViewAvatarImage}"/>
+                <Label Name="username" Style="{StaticResource ViewAvatarName}"/>
             </StackPanel>
 
-            <ListView Name="stiki" DockPanel.Dock="Top" MouseDoubleClick="stiki_MouseDoubleClick" ItemsSource="{Binding Contacts}" SelectedItem="{Binding CurrentContact}" >
+            <ListView Name="stiki" MouseDoubleClick="stiki_MouseDoubleClick" Style="{StaticResource ViewListView}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <DockPanel>
-                            <Image Source="{Binding Avatar}" Width="25" DockPanel.Dock="Left" />
-                            <Ellipse Name="UserStatus" Width="10" Height="10" Margin="5" Fill="Black" />
-                            <Label Content="{Binding Name}" VerticalContentAlignment="Center" />
+                            <Image Style="{StaticResource ViewContactImage}"/>
+                            <Ellipse Name="UserStatus" Style="{StaticResource ViewContactStatus}"/>
+                            <Label Style="{StaticResource ViewContactName}"/>
                         </DockPanel>
 
                         <DataTemplate.Triggers>
@@ -63,6 +68,6 @@
             </ListView>
         </DockPanel>
 
-        <local:ChatBox Grid.Row="1" Grid.Column="2" OnNewMessage="ChatBox_OnNewMessage" DataContext="{Binding CurrentContact}" />
+        <local:ChatBox OnNewMessage="ChatBox_OnNewMessage" Style="{StaticResource ViewOgChatBox}"/>
     </Grid>
 </UserControl>
