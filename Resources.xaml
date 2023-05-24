@@ -71,7 +71,7 @@
 
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="DarkGreen" />
+                <Setter Property="Foreground" Value="DarkGreen" />
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -88,7 +88,7 @@
 
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="DarkRed" />
+                <Setter Property="Foreground" Value="DarkRed" />
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -210,7 +210,7 @@
             <Setter Property="Source" Value="images/no_chat.png"/>
             <Setter Property="Width" Value="100"/>
             <Setter Property="Height" Value="100"/>
-            <Setter Property="Visibility" Value="Hidden"/>
+            <Setter Property="Visibility" Value="Visible"/>
         </Style.Setters>
 
         <Style.Triggers>
@@ -222,10 +222,6 @@
                     </Storyboard>
                 </BeginStoryboard>
             </EventTrigger>
-
-            <DataTrigger Binding="{Binding CurrentContact}" Value="{x:Null}">
-                <Setter Property="Visibility" Value="Visible"/>
-            </DataTrigger>
         </Style.Triggers>
     </Style>
 

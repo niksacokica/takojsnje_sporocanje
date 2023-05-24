@@ -31,7 +31,7 @@
             </DockPanel>
 
             <Canvas Style="{StaticResource ChatBoxInnerCanvas}">
-                <Image Style="{StaticResource ChatBoxNoChatImage}" Visibility="Hidden"/>
+                <Image Name="NoChatImage" Style="{StaticResource ChatBoxNoChatImage}"/>
             </Canvas>
         </Grid>
     </Canvas>

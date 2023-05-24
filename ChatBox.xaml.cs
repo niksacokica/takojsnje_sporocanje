@@ -29,5 +29,12 @@ namespace takojsnje_sporocanje{
             chatSend.Text += emojiPicker.Selection;
             emojiPicker.Selection = null;
         }
+
+        public void ToggleImageVisibility(Contact curr){
+            if( curr == null )
+                NoChatImage.Visibility = Visibility.Visible;
+            else
+                NoChatImage.Visibility = Visibility.Hidden;
+        }
     }
 }

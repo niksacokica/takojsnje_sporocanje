@@ -68,6 +68,6 @@
             </ListView>
         </DockPanel>
 
-        <local:ChatBox OnNewMessage="ChatBox_OnNewMessage" Style="{StaticResource ViewOgChatBox}"/>
+        <local:ChatBox x:Name="chatBox" OnNewMessage="ChatBox_OnNewMessage" Style="{StaticResource ViewOgChatBox}"/>
     </Grid>
 </UserControl>

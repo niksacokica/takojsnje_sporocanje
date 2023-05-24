@@ -37,7 +37,7 @@
             </MenuItem>
         </Menu>
 
-        <local:ChatBox OnNewMessage="ChatBox_OnNewMessage" Style="{StaticResource ViewNewChatBox}"/>
+        <local:ChatBox x:Name="chatBox" OnNewMessage="ChatBox_OnNewMessage" Style="{StaticResource ViewNewChatBox}"/>
 
         <DockPanel Style="{StaticResource ViewDockPanelNew}">
             <StackPanel Style="{StaticResource ViewStackPanel}">
