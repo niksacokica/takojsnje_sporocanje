@@ -7,9 +7,8 @@ namespace takojsnje_sporocanje{
     public partial class EditContact : Window{
         public bool cancel = true;
 
-        public EditContact(){
+        public EditContact() =>
             InitializeComponent();
-        }
 
         private void OpenAvatar(object sender, RoutedEventArgs e){
             OpenFileDialog openFile = new OpenFileDialog();
@@ -40,8 +39,7 @@ namespace takojsnje_sporocanje{
                 email.Background = Brushes.White;
         }
 
-        private void Cancel(object sender, RoutedEventArgs e){
+        private void Cancel(object sender, RoutedEventArgs e) =>
             Close();
-        }
     }
 }

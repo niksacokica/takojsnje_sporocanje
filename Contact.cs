@@ -24,9 +24,8 @@ namespace takojsnje_sporocanje{
             Status = status;
         }
 
-        public Contact(){
+        public Contact() =>
             Avatar = "../../../images/user_avatar.png";
-        }
 
         public string Name{
             get { return name; }
@@ -88,9 +87,8 @@ namespace takojsnje_sporocanje{
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public override string ToString(){
-            return Name;
-        }
+        public override string ToString() =>
+            Name;
 
         public string GetConversation{
             get { string convo = "";
@@ -101,14 +99,12 @@ namespace takojsnje_sporocanje{
             }
         }
 
-        public Boolean IsValid(){
-            return Name.Length > 2 && new EmailAddressAttribute().IsValid(Email) && File.Exists(Avatar);
-        }
+        public Boolean IsValid() =>
+            Name.Length > 2 && new EmailAddressAttribute().IsValid(Email) && File.Exists(Avatar);
 
         private void NotifyPropertyChanged(string Name){
-            if(PropertyChanged != null){
+            if(PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(Name));
-            }
         }
     }
 }

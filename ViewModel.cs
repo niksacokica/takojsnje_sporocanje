@@ -7,7 +7,6 @@ using System.Text.Json;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
-using Windows.UI.Xaml.Controls;
 
 namespace takojsnje_sporocanje{
     public class ViewModel : INotifyPropertyChanged{
@@ -59,7 +58,18 @@ namespace takojsnje_sporocanje{
 
             });
             ExitApp = new Command(obj => { Application.Current.Shutdown(); });
-            OpenSettings = new Command(obj => { var settings = new SettingsWindow(); settings.ShowDialog(); dt.Interval = Properties.Settings.Default.PeriodicalSaveTimeSpan; });
+            OpenSettings = new Command(obj => {
+                var settings = new SettingsWindow();
+                settings.ShowDialog();
+
+                dt.Interval = Properties.Settings.Default.PeriodicalSaveTimeSpan;
+                
+                try{
+                    ((OgView)UC).NameChanged();
+                }catch{
+                    ((NewView)UC).NameChanged();
+                }
+            });
             LoadContacts = new Command(obj => {
                 OpenFileDialog openFile = new OpenFileDialog();
                 openFile.Filter = "Json files (*.json)|*.json";
@@ -121,7 +131,7 @@ namespace takojsnje_sporocanje{
                 currentContact = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("CurrentContact"));
 
-                if(value == null){
+                if (value == null){
                     if(editContact != null)
                         editContact.Close();
                     return;
